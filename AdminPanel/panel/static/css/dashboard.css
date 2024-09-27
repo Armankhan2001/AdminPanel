@@ -1,0 +1,104 @@
+/* static/css/dashboard.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5; /* Light background */
+}
+
+.dashboard-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    color: #333;
+}
+
+nav a {
+    text-decoration: none;
+    color: #007bff; /* Link color */
+}
+
+.summary {
+    margin-bottom: 20px;
+}
+
+.summary-cards {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.partner-listing {
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+/* Add this style for the button */
+.add-partner-button {
+    padding: 10px 15px;
+    background-color: #28a745; /* Green color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.add-partner-button:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+
+
+/* Style for the search bar */
+.search-bar {
+    width: 120px; /* Set a smaller width for the search bar */
+    padding: 5px; /* Reduce padding for a more compact look */
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 4px; /* Slightly rounded corners */
+    font-size: 14px; /* Adjust font size */
+    margin-right: 10px; /* Space between the search bar and button */
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+

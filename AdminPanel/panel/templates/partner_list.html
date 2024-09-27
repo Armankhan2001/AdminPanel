@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Listing</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <div class="partner-listing-container">
+        <header>
+            <h1>Partner Listing</h1>
+            <nav>
+                <p>Welcome, {{ user.username }}! <br><small>super admin</small></p>
+                <a href="{% url 'admin_login' %}">Logout</a>
+            </nav>
+        </header>
+
+        <section class="partner-list-header">
+            <button onclick="window.location.href='{% url 'add_partner' %}'" class="add-partner-button">Add Partner</button>
+            <button onclick="window.location.href='{% url 'dashboard' %}'" class="add-partner-button">Go to Dashboard</button>
+            <input type="text" id="partner-search" placeholder="Search partners..." onkeyup="filterPartners()" class="search-bar">
+        </section>
+
+        <table id="partner-table">
+            <thead>
+                <tr>
+                    <th>sr.no</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for partner in partners %}
+                <tr>
+                    <td>{{ partner.id }}</td>
+                    <td>{{ partner.name }}</td>
+                    <td>{{ partner.email }} </td>
+                    <td>{{ partner.phone }} </td>
+                    <td>
+                        <a href="{% url 'partner_details' partner.id %}">View</a>
+                        <a href="{% url 'edit_partner' partner.id %}">Edit</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No partners found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function filterPartners() {
+            const searchInput = document.getElementById('partner-search');
+            const filter = searchInput.value.toLowerCase();
+            const table = document.getElementById('partner-table');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let match = false;
+
+                for (let j = 0; j < cells.length - 1; j++) {
+                    if (cells[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                        match = true;
+                        break;
+                    }
+                }
+
+                rows[i].style.display = match ? '' : 'none'; 
+            }
+        }
+    </script>
+</body>
+</html>

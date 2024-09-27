@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}"> 
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>Admin Dashboard</h1>
+            <nav>
+                <p>Welcome, {{ user.username }}! <br><small>super admin</small></p>
+                
+                <a href="{% url 'admin_login' %}">Logout</a>
+            </nav>
+        </header>
+
+        <section class="summary">
+            <h2>System Summary</h2>
+            <div class="summary-cards">
+                <div class="card">
+                    <h3>Total Partners</h3>
+                    <p>{{ total_partners }}</p>
+                </div>
+                <div class="card">
+                    <h3>Recent Activity</h3>
+                    <p>{{ recent_activity }}</p>
+                </div>
+            </div>
+        </section>
+        <br>
+
+        <section class="partner-listing">
+            <h2>Partner Listing</h2>
+            <button onclick="window.location.href='{% url 'add_partner' %}'" class="add-partner-button">Add Partner</button>
+            <button onclick="window.location.href='{% url 'partner_list' %}'" class="add-partner-button">Partner List</button>
+            <input type="text" id="partner-search" placeholder="Search partners..." onkeyup="filterPartners()" class="search-bar">
+
+
+            <table id="partner-table">
+                <thead>
+                    <tr>
+                        <th>sr.no</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for partner in partners %}
+                    <tr>
+                        <td>{{ partner.id }}</td>
+                        <td>{{ partner.name }}</td>
+                        <td>{{ partner.email}} </td>
+                        <td>{{ partner.phone}} </td>
+                        <td>
+                            <a href="{% url 'partner_details' partner.id %}">View</a>
+                            <a href="{% url 'edit_partner' partner.id %}">Edit</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">No partners found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script>
+        function filterPartners() {
+            const searchInput = document.getElementById('partner-search');
+            const filter = searchInput.value.toLowerCase();
+            const table = document.getElementById('partner-table');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) { 
+                const cells = rows[i].getElementsByTagName('td');
+                let match = false;
+
+                for (let j = 0; j < cells.length - 1; j++) { 
+                    if (cells[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                        match = true;
+                        break;
+                    }
+                }
+
+                rows[i].style.display = match ? '' : 'none'; 
+            }
+        }
+    </script>
+</body>
+</html>

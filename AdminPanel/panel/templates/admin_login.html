@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="{% static '' %}" alt="Logo">  <!-- Update this with your logo path -->
+        </div>
+        <h2>Admin Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <div class="trademark">
+            <p>Innovate Elevate Transform</p>
+        </div>
+        <div class="links">
+            <a href="{% url 'password_reset' %}">Forgot Password?</a> 
+            <a href="{% url 'account_signup' %}">Sign Up</a></small>
+        </div>
+    </div>
+</body>
+</html>
+
