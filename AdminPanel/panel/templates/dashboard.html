@@ -14,7 +14,7 @@
             <nav>
                 <p>Welcome, {{ user.username }}! <br><small>super admin</small></p>
                 
-                <a href="{% url 'admin_login' %}">Logout</a>
+                <a href="{% url 'account_logout' %}">Logout</a>
             </nav>
         </header>
 
@@ -64,7 +64,7 @@
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="3">No partners found.</td>
+                        <td colspan="5">No partners found.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
